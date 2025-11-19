@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/client";
-import { GameDTO } from "../types/GameDto";
+import { GameDTO } from "../types/gameDTO";
 import { GameTypeDTO } from "../types/gameTypeDTO";
 
 export const fetchAllGames = async () => {

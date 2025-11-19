@@ -11,7 +11,8 @@
     "build": "tsc",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "prisma db seed",
+    "vercel-build": "npm run prisma:migrate && npm run prisma:seed && npm run build"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -33,6 +34,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@clerk/express": "^1.7.50",
     "@prisma/client": "^6.17.1",
     "body-parser": "^2.2.0",
     "class-transformer": "^0.5.1",

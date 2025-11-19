@@ -1,7 +1,8 @@
-import { Controller, Delete, Get, Param, Req, Res } from "routing-controllers";
+import { Controller, Delete, Get, Param, Req, Res, UseBefore } from "routing-controllers";
 import { successResponse } from "../models/responseModel";
 import * as GameService from "../services/gameService";
 import { Request, Response } from "express";
+import { requireAuth } from "@clerk/express";
 
 @Controller()
 export class GameCollectionController {
@@ -26,6 +27,7 @@ export class GameCollectionController {
   }
 
   @Delete("/games/:id")
+  @UseBefore(requireAuth())
   async delete(@Param("id") id: string, @Req() req: Request, @Res() res: Response) {
     try {
       await GameService.deleteGame(id);
