@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model GameCollection {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  price       Decimal
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  gameTypeId  String
+  gameType    GameType @relation(fields: [gameTypeId], references: [id], onDelete: Cascade)
+}
+
+
+model GameType {
+  id          String @id @default(uuid())
+  type        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  games       GameCollection[]
+}
